@@ -9,7 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource
+ * @ApiResource(
+ *     itemOperations={
+ *         "get",
+ *         "patch": {"method": "PATCH"}
+ *     },
+ *     collectionOperations={
+ *         "post",
+ *         "get"
+ *     }
+ * )
  * @ORM\Entity
  */
 class User
