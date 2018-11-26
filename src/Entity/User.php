@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource
@@ -26,6 +27,8 @@ class User
      * @var string
      *
      * @ORM\Column
+     * @Assert\NotNull
+     * @Assert\Length(max="30")
      */
     private $firstName;
 
@@ -33,6 +36,8 @@ class User
      * @var string
      *
      * @ORM\Column
+     * @Assert\NotNull
+     * @Assert\Length(max="30")
      */
     private $lastName;
 
@@ -40,6 +45,8 @@ class User
      * @var string
      *
      * @ORM\Column
+     * @Assert\NotNull
+     * @Assert\Choice(choices={"male", "female", "unknown"})
      */
     private $gender;
 
