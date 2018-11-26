@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
  *     itemOperations={
- *         "get": {"path": "/test/{id}"},
+ *         "get",
  *         "patch": {"method": "PATCH"}
  *     },
  *     collectionOperations={
@@ -59,14 +61,22 @@ class User
      */
     private $gender;
 
+    /**
+     * @var Booking[]
+     *
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="user")
+     * @ApiSubresource
+     */
+    private $bookings;
+
+    public function __construct()
+    {
+        $this->bookings = new ArrayCollection();
+    }
+
     public function getId(): int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): void
-    {
-        $this->id = $id;
     }
 
     public function getFirstName(): string
@@ -97,5 +107,38 @@ class User
     public function setGender(string $gender): void
     {
         $this->gender = $gender;
+    }
+
+    public function getBookings(): array
+    {
+        return $this->bookings;
+    }
+
+    public function hasBooking(Booking $booking): array
+    {
+        return $this->bookings->contains($booking);
+    }
+
+    public function addBooking(Booking $booking)
+    {
+        if (!$this->hasBooking($booking)) {
+            $booking->setUser($this);
+
+            $this->bookings->add($booking);
+        }
+    }
+
+    public function removeBooking(Booking $booking)
+    {
+        if ($this->hasBooking($booking)) {
+            $booking->setUser(null);
+
+            $this->bookings->removeElement($booking);
+        }
+    }
+
+    public function setBookings(array $bookings): void
+    {
+        $this->bookings = $bookings;
     }
 }
