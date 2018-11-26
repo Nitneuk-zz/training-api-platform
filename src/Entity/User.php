@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ApiResource(
  *     itemOperations={
- *         "get",
+ *         "get": {"path": "/test/{id}"},
  *         "patch": {"method": "PATCH"}
  *     },
  *     collectionOperations={
