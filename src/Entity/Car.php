@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     attributes={
+            "order": {"brand": "ASC"}
+ *     },
  *     itemOperations={
  *         "get",
  *         "patch": {"method": "PATCH"}
