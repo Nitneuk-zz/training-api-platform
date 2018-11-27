@@ -8,12 +8,15 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *     normalizationContext={"groups": {"car_read"}},
+ *     denormalizationContext={"groups": {"car_write"}},
  *     attributes={
-            "order": {"brand": "ASC"}
+ *          "order": {"brand": "ASC"}
  *     },
  *     itemOperations={
  *         "get",
@@ -44,6 +47,10 @@ class Car
      * @ORM\Column
      * @Assert\NotNull
      * @Assert\Length(max="20")
+     * @Groups({
+     *     "car_read",
+     *     "car_write"
+     * })
      */
     private $brand;
 
@@ -53,6 +60,10 @@ class Car
      * @ORM\Column
      * @Assert\NotNull
      * @Assert\Length(max="30")
+     * @Groups({
+     *     "car_read",
+     *     "car_write"
+     * })
      */
     private $model;
 
@@ -61,6 +72,9 @@ class Car
      *
      * @ORM\Column
      * @Assert\NotNull
+     * @Groups({
+     *     "car_write"
+     * })
      */
     private $numberPlate;
 

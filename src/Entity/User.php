@@ -7,6 +7,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -109,12 +110,12 @@ class User
         $this->gender = $gender;
     }
 
-    public function getBookings(): array
+    public function getBookings(): Collection
     {
         return $this->bookings;
     }
 
-    public function hasBooking(Booking $booking): array
+    public function hasBooking(Booking $booking): bool
     {
         return $this->bookings->contains($booking);
     }
