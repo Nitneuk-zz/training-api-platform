@@ -31,7 +31,7 @@ class CarPersister implements DataPersisterInterface
         return $data instanceof Car;
     }
 
-    public function persist($data)
+    public function persist($data): Car
     {
         $em = $this->registry->getEntityManager();
         $em->persist($data);
@@ -42,7 +42,7 @@ class CarPersister implements DataPersisterInterface
         return $data;
     }
 
-    public function remove($data)
+    public function remove($data): void
     {
         throw \BadMethodCallException('You cannot delete a car.');
     }
