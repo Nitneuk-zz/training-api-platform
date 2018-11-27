@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *     normalizationContext={"groups": {"car_read"}},
  *     denormalizationContext={"groups": {"car_write"}},
+ *     paginationItemsPerPage=10,
  *     attributes={
  *          "order": {"brand": "ASC"}
  *     },
@@ -46,7 +47,7 @@ class Car
      *
      * @ORM\Column
      * @Assert\NotNull
-     * @Assert\Length(max="20", groups={"patch_validation"}
+     * @Assert\Length(max="20", groups={"patch_validation"})
      * @Assert\Length(max="30", groups={"post_validation"})
      * @Groups({
      *     "car_read",
