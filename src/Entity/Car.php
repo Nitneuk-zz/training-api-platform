@@ -20,10 +20,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     itemOperations={
  *         "get",
- *         "patch": {"method": "PATCH"}
+ *         "patch": {"method": "PATCH", "validationGroups"="patch_validation"}
  *     },
  *     collectionOperations={
- *         "post",
+ *         "post": {"validationGroups"="post_validation"},
  *         "get"
  *     }
  * )
@@ -46,7 +46,8 @@ class Car
      *
      * @ORM\Column
      * @Assert\NotNull
-     * @Assert\Length(max="20")
+     * @Assert\Length(max="20", groups={"patch_validation"}
+     * @Assert\Length(max="30", groups={"post_validation"})
      * @Groups({
      *     "car_read",
      *     "car_write"
