@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "order": {"brand": "ASC"}
  *     },
  *     itemOperations={
- *         "get",
+ *         "get": {"access_control": "is_granted('ROLE_ADMIN')"},
  *         "patch": {"method": "PATCH", "validationGroups"="patch_validation"}
  *     },
  *     collectionOperations={
